@@ -8,32 +8,32 @@ import (
 func Create(db *sql.DB, sqlStatement string, args ...interface{}) {
 	// create table
 	stmt, err := db.Prepare(sqlStatement)
-	CheckErr(err)
+	checkErr(err)
 
 	defer stmt.Close()
 
 	_, err = stmt.Exec(args...)
-	CheckErr(err)
+	checkErr(err)
 }
 
 func Drop(db *sql.DB, sqlStatement string, args ...interface{}) {
 	// drop table
 	stmt, err := db.Prepare(sqlStatement)
-	CheckErr(err)
+	checkErr(err)
 
 	defer stmt.Close()
 
 	_, err = stmt.Exec(args...)
-	CheckErr(err)
+	checkErr(err)
 }
 
 func Open(driver string, source string) (*sql.DB, error) {
 	// open db
 	db, err := sql.Open(driver, source)
-	CheckErr(err)
+	checkErr(err)
 
 	err = db.Ping()
-	CheckErr(err)
+	checkErr(err)
 
 	return db, err
 }
@@ -46,12 +46,12 @@ func Close(db *sql.DB) {
 func Insert(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error) {
 	// insert record
 	stmt, err := db.Prepare(sqlStatement)
-	CheckErr(err)
+	checkErr(err)
 
 	defer stmt.Close()
 
 	res, err := stmt.Exec(args...)
-	CheckErr(err)
+	checkErr(err)
 
 	return res.LastInsertId()
 }
@@ -105,7 +105,7 @@ func Query(db *sql.DB, sqlStatement string, args ...interface{}) (*[]map[string]
 func Update(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error) {
 	// update columns
 	stmt, err := db.Prepare(sqlStatement)
-	CheckErr(err)
+	checkErr(err)
 
 	defer stmt.Close()
 
@@ -117,16 +117,16 @@ func Update(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error)
 func Delete(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error) {
 	// delete records
 	stmt, err := db.Prepare(sqlStatement)
-	CheckErr(err)
+	checkErr(err)
 
 	defer stmt.Close()
 
 	res, err := stmt.Exec(args...)
-	CheckErr(err)
+	checkErr(err)
 	return res.RowsAffected()
 }
 
-func CheckErr(err error) {
+func checkErr(err error) {
 	if err != nil {
 		panic(err)
 	}
