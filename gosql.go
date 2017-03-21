@@ -6,7 +6,7 @@ import (
 )
 
 func Create(db *sql.DB, sqlStatement string, args ...interface{}) {
-	//插入数据
+	// create table
 	stmt, err := db.Prepare(sqlStatement)
 	CheckErr(err)
 
@@ -17,6 +17,7 @@ func Create(db *sql.DB, sqlStatement string, args ...interface{}) {
 }
 
 func Drop(db *sql.DB, sqlStatement string, args ...interface{}) {
+	// drop table
 	stmt, err := db.Prepare(sqlStatement)
 	CheckErr(err)
 
@@ -27,6 +28,7 @@ func Drop(db *sql.DB, sqlStatement string, args ...interface{}) {
 }
 
 func Open(driver string, source string) (*sql.DB, error) {
+	// open db
 	db, err := sql.Open(driver, source)
 	CheckErr(err)
 
@@ -37,11 +39,12 @@ func Open(driver string, source string) (*sql.DB, error) {
 }
 
 func Close(db *sql.DB) {
+	// close db
 	db.Close()
 }
 
 func Insert(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error) {
-	//插入数据
+	// insert record
 	stmt, err := db.Prepare(sqlStatement)
 	CheckErr(err)
 
@@ -54,6 +57,7 @@ func Insert(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error)
 }
 
 func Query(db *sql.DB, sqlStatement string, args ...interface{}) (*[]map[string]string, error) {
+	// query records
 	stmtOut, err := db.Prepare(sqlStatement)
 	if err != nil {
 		panic(err.Error())
@@ -99,6 +103,7 @@ func Query(db *sql.DB, sqlStatement string, args ...interface{}) (*[]map[string]
 }
 
 func Update(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error) {
+	// update columns
 	stmt, err := db.Prepare(sqlStatement)
 	CheckErr(err)
 
@@ -110,6 +115,7 @@ func Update(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error)
 }
 
 func Delete(db *sql.DB, sqlStatement string, args ...interface{}) (int64, error) {
+	// delete records
 	stmt, err := db.Prepare(sqlStatement)
 	CheckErr(err)
 
