@@ -5,25 +5,25 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func Create(db *sql.DB, schema string, args ...interface{}) {
+func Create(db *sql.DB, schema string) {
 	// create table
 	stmt, err := db.Prepare(schema)
 	checkErr(err)
 
 	defer stmt.Close()
 
-	_, err = stmt.Exec(args...)
+	_, err = stmt.Exec()
 	checkErr(err)
 }
 
-func Drop(db *sql.DB, schema string, args ...interface{}) {
+func Drop(db *sql.DB, schema string) {
 	// drop table
 	stmt, err := db.Prepare(schema)
 	checkErr(err)
 
 	defer stmt.Close()
 
-	_, err = stmt.Exec(args...)
+	_, err = stmt.Exec()
 	checkErr(err)
 }
 
