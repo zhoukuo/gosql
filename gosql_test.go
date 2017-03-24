@@ -79,9 +79,9 @@ func TestDelete(t *testing.T) {
 
 func TestDrop(t *testing.T) {
 	Drop(db, "DROP TABLE userinfo")
-	os.Remove("test.db")
 }
 
 func TestClose(t *testing.T) {
 	Close(db)
+	os.Remove("test.db")
 }
